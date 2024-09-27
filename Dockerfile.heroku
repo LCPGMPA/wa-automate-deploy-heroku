@@ -31,7 +31,7 @@ EXPOSE $PORT
 # Switch back to a non-root user if you need to, else leave as root
 # USER node
 
-# Start both the Node.js server and Python script using concurrently
-CMD ["yarn", "start"]
+# Start both the Node.js server and Python script
+CMD ["sh", "-c", "yarn start"]
 
 
