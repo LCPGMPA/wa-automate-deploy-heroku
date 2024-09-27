@@ -1,4 +1,18 @@
+# Use the Open-WA image as the base
 FROM openwa/wa-automate
+
+# Install Python and pip
+RUN apt-get update && apt-get install -y python3 python3-pip
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the application files into the container
+COPY . .
+
+# Install Python dependencies
+RUN pip3 install -r requirements.txt
+
 ENTRYPOINT[]
 
 
