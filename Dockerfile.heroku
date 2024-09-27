@@ -1,4 +1,5 @@
 FROM openwa/wa-automate
+ENTRYPOINT []
 
 # Switch to root user
 USER root
@@ -26,6 +27,12 @@ RUN /app/venv/bin/pip install -r requirements.txt
 # Copy the rest of your application files
 COPY . .
 
+# Create and add the start.sh file
+RUN echo '#!/bin/bash\n yarn start' > /app/start.sh
+
+# Make start.sh executable
+RUN chmod +x /app/start.sh
+
 # Expose the port
 EXPOSE $PORT
 
@@ -33,6 +40,6 @@ EXPOSE $PORT
 # USER node
 
 # Start both the Node.js server and Python script
-CMD ["sh", "-c", "yarn start"]
+CMD ["./start.sh"]
 
 
