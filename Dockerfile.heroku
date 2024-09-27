@@ -1,5 +1,5 @@
-# Start with a base image that supports both Node.js and Python
-FROM node:18 as node-base
+# Start with the Open-WA base image
+FROM openwa/wa-automate
 
 # Install Python and venv
 RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
