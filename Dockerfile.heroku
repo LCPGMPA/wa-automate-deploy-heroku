@@ -1,5 +1,8 @@
 FROM openwa/wa-automate
 
+# Switch to root user
+USER root
+
 # Set working directory
 WORKDIR /app
 
@@ -10,7 +13,6 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 # Install Python and required packages
-USER root  # Switch to root user to install packages
 RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
 
 # Create a virtual environment for Python
