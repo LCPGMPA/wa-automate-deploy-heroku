@@ -1,5 +1,4 @@
 FROM openwa/wa-automate
-ENTRYPOINT []
 
 # Switch to root user
 USER root
