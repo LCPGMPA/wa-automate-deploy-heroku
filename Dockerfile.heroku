@@ -1,2 +1,28 @@
-FROM openwa/wa-automate
-ENTRYPOINT []
+# Start with a base image that supports both Node.js and Python
+FROM node:14 as node-base
+
+# Install Python
+RUN apt-get update && apt-get install -y python3 python3-pip
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies for Node.js
+COPY package.json yarn.lock ./
+RUN yarn install
+
+# Copy your Python app
+COPY app.py .
+
+# Install any required Python packages
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
+# Copy other project files
+COPY . .
+
+# Install concurrently to run both processes
+RUN yarn add concurrently
+
+# Final command to run both the Node.js server and Python script
+CMD ["yarn", "concurrently", "\"npx @open-wa/wa-automate --disable-spins --port $PORT --popup --in-docker --qr-timeout 0 -k $API_KEY --keep-alive --keep-updated --executable-path='/app/.apt/usr/bin/google-chrome'\"", "\"python3 app.py\""]
