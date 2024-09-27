@@ -4,7 +4,6 @@ ENTRYPOINT []
 # Switch to root user
 USER root
 
-
 # Set working directory
 WORKDIR /app
 
@@ -27,9 +26,6 @@ RUN /app/venv/bin/pip install -r requirements.txt
 # Copy the rest of your application files
 COPY . .
 
-# Create and add the start.sh file
-RUN echo '#!/bin/bash\n yarn start' > /app/start.sh
-
 # Make start.sh executable
 RUN chmod +x /app/start.sh
 
@@ -40,6 +36,6 @@ EXPOSE $PORT
 # USER node
 
 # Start both the Node.js server and Python script
-CMD ["./start.sh"]
+CMD ["sh", "./start.sh"]
 
 
