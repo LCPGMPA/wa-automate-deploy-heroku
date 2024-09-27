@@ -2,9 +2,9 @@ build:
   docker:
     web: Dockerfile.heroku
 run:
-  web:
+  web: PORT=$PORT WA_PORT=$PORT node ./node_modules/@open-wa/wa-automate/bin/server.js --use-chrome --force-port=$PORT --in-docker --qr-timeout 0 --popup --multi-device --debug --verbose --disable-spins --ezqr
+  worker:
     command:
-      - PORT=$PORT WA_PORT=$PORT node ./node_modules/@open-wa/wa-automate/bin/server.js --use-chrome --force-port=$PORT --in-docker --qr-timeout 0 --popup --multi-device --debug --verbose --disable-spins --ezqr
       - python app.py
     image: web
 
