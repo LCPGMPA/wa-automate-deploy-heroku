@@ -1,40 +1,5 @@
 FROM openwa/wa-automate
+ENTRYPOINT[]
 
-# Switch to root user
-USER root
-
-# Set working directory
-WORKDIR /app
-
-# Install Python and required packages first
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
-
-# Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
-
-# Install Node.js dependencies
-RUN yarn install
-
-# Create a virtual environment for Python
-RUN python3 -m venv venv
-
-# Copy the requirements.txt and install Python dependencies
-COPY requirements.txt ./
-RUN /app/venv/bin/pip install -r requirements.txt
-
-# Copy the rest of your application files
-COPY . .
-
-# Make start.sh executable
-RUN chmod +x /app/start.sh
-
-# Expose the port
-EXPOSE $PORT
-
-# Switch back to a non-root user if you need to, else leave as root
-# USER node
-
-# Set ENTRYPOINT
-ENTRYPOINT ["sh", "./start.sh"]
 
 
