@@ -24,10 +24,7 @@ RUN ./venv/bin/pip install -r requirements.txt
 # Copy your Python app
 COPY app.py .
 
-# Copy other project files
-COPY . .
-
 # Final command to run both the Node.js server and Python script
-CMD ["yarn", "concurrently", "\"npx @open-wa/wa-automate --disable-spins --port $PORT --popup --in-docker --qr-timeout 0 -k $API_KEY --keep-alive --keep-updated --executable-path='/app/.apt/usr/bin/google-chrome'\"", "\"./venv/bin/python app.py\""]
+CMD ["yarn", "concurrently", "npx @open-wa/wa-automate --disable-spins --port $PORT --popup --in-docker --qr-timeout 0 -k $API_KEY --keep-alive --keep-updated --executable-path='/app/.apt/usr/bin/google-chrome'", "./venv/bin/python app.py"]
 
 
