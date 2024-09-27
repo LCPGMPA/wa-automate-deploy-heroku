@@ -1,30 +1,35 @@
-# Start with the Open-WA base image
 FROM openwa/wa-automate
-
-# Switch to root user to install packages
-USER root
-
-# Install Python and venv
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies for Node.js
+# Copy package.json and yarn.lock
 COPY package.json yarn.lock ./
+
+# Install Node.js dependencies
 RUN yarn install
+
+# Install Python and required packages
+USER root  # Switch to root user to install packages
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
 
 # Create a virtual environment for Python
 RUN python3 -m venv venv
 
-# Activate the virtual environment and install Python packages
-COPY requirements.txt .
-RUN ./venv/bin/pip install -r requirements.txt
+# Copy the requirements.txt and install Python dependencies
+COPY requirements.txt ./
+RUN /app/venv/bin/pip install -r requirements.txt
 
-# Copy your Python app
-COPY app.py .
+# Copy the rest of your application files
+COPY . .
 
-# Final command to run both the Node.js server and Python script
-CMD ["yarn", "concurrently", "npx @open-wa/wa-automate --disable-spins --port $PORT --popup --in-docker --qr-timeout 0 -k $API_KEY --keep-alive --keep-updated --executable-path='/app/.apt/usr/bin/google-chrome'", "./venv/bin/python app.py"]
+# Expose the port
+EXPOSE $PORT
+
+# Switch back to a non-root user if you need to, else leave as root
+# USER node
+
+# Start both the Node.js server and Python script using concurrently
+CMD ["yarn", "start"]
 
 
