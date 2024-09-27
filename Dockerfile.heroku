@@ -1,7 +1,7 @@
-FROM openwa/wa-automate
-
 # Switch to root user
 USER root
+
+FROM openwa/wa-automate
 
 # Set working directory
 WORKDIR /app
