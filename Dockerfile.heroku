@@ -35,7 +35,7 @@ EXPOSE $PORT
 # Switch back to a non-root user if you need to, else leave as root
 # USER node
 
-# Start both the Node.js server and Python script
-CMD ["sh", "./start.sh"]
+# Set ENTRYPOINT
+ENTRYPOINT ["sh", "./start.sh"]
 
 
