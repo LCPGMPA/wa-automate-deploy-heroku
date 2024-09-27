@@ -1,8 +1,8 @@
 # Start with a base image that supports both Node.js and Python
 FROM node:18 as node-base
 
-# Install Python
-RUN apt-get update && apt-get install -y python3 python3-pip
+# Install Python and venv
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
 
 # Set working directory
 WORKDIR /app
@@ -11,19 +11,20 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
+# Create a virtual environment for Python
+RUN python3 -m venv venv
+
+# Activate the virtual environment and install Python packages
+COPY requirements.txt .
+RUN ./venv/bin/pip install -r requirements.txt
+
 # Copy your Python app
 COPY app.py .
-
-# Install any required Python packages
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
 
 # Copy other project files
 COPY . .
 
-# Install concurrently to run both processes
-RUN yarn add concurrently
-
 # Final command to run both the Node.js server and Python script
-CMD ["yarn", "concurrently", "\"npx @open-wa/wa-automate --disable-spins --port $PORT --popup --in-docker --qr-timeout 0 -k $API_KEY --keep-alive --keep-updated --executable-path='/app/.apt/usr/bin/google-chrome'\"", "\"python3 app.py\""]
+CMD ["yarn", "concurrently", "\"npx @open-wa/wa-automate --disable-spins --port $PORT --popup --in-docker --qr-timeout 0 -k $API_KEY --keep-alive --keep-updated --executable-path='/app/.apt/usr/bin/google-chrome'\"", "\"./venv/bin/python app.py\""]
+
 
