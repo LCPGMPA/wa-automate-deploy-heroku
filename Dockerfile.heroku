@@ -1,6 +1,9 @@
 # Start with the Open-WA base image
 FROM openwa/wa-automate
 
+# Switch to root user to install packages
+USER root
+
 # Install Python and venv
 RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
 
