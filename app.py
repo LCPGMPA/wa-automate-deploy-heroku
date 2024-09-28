@@ -585,7 +585,7 @@ client = SocketClient('https://whatsappbotlcpgm-efc856ff6190.herokuapp.com/api-d
 def messageHandler(message):
     if is_bot_active():
         ti.sleep(2)
-        print(f"Received message: {message}")
+        print(f"---------------RECEIVED MESSAGE!---------------")
 
         # Extract 'data' key from the outer dictionary
         if 'data' in message:
@@ -631,7 +631,7 @@ def messageHandler(message):
                 if re.match("^[A-Za-z\s]+$", text):  # Check if the name contains only letters and spaces
                     # If user provides a valid name, save the name and update status
                     users.update_one({"number": wa_number}, {"$set": {"name": text, "status": "main"}})
-                    client.sendText(wa_number,f"Obrigada, {text}! Como podemos ajudá-lo hoje? 😊\n\nPara marcar um agendamento para um procedimento,\ndigite 1️⃣\n\nPara acessar nossos produtos,\ndigite 2️⃣\n\nPara outras perguntas ou comentários,\ndigite 3️⃣")
+                    client.sendText(wa_number,f"Obrigada, {text}! Como podemos ajudá-lo hoje? 😊\n\nPara marcar um agendamento para um procedimento,\ndigite 1️⃣\n\nPara acessar nossos produtos,\ndigite 2️⃣\n\nPara outras perguntas ou comentários,\ndigite 3️⃣ \n\n\nGostaríamos de anunciar que recentemente também realizamos procedimentos de epilação a laser!🥳")
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})
                 else:
                     # If the name is invalid, ask for the name again
@@ -641,7 +641,7 @@ def messageHandler(message):
                 if wa_number not in blocked_numbers:
                 # If the user exists and the name is known
                     print(f' number not blocked: {wa_number}')
-                    client.sendText(wa_number,f"Oi {name}! Você está bem? Como podemos ajudá-lo? 🤗\n\nPara marcar um agendamento para um procedimento,\ndigite 1️⃣\n\nPara acessar nossos produtos,\ndigite 2️⃣\n\nPara falar conosco pessoalmente e perguntas/comentários\ndigite 3️⃣")
+                    client.sendText(wa_number,f"Oi {name}! Você está bem? Como podemos ajudá-lo? 🤗\n\nPara marcar um agendamento para um procedimento,\ndigite 1️⃣\n\nPara acessar nossos produtos,\ndigite 2️⃣\n\nPara falar conosco pessoalmente e perguntas/comentários\ndigite 3️⃣ \n\n\nGostaríamos de anunciar que recentemente também realizamos procedimentos de epilação a laser!🥳")
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})
                 else:
                     client.sendText(wa_number,f"Oi {name}! 🙂\nNosso bot do WhatsApp não está funcionando no momento. \n\nA recepcionista tentará entrar em contato com você o mais breve possível!")
