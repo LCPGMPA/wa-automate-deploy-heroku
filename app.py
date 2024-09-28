@@ -695,7 +695,7 @@ def messageHandler(message):
                         product_index = int(text.strip()) - 1
                         print(f"PRODUCT PHASE\n-----------\nproduct index: {product_index}")
                         product_list = product_menu(file_id_2, sheet_name="LCprodutos", description_mode=False, index=None)
-                        if product_index < 0 or product_index >= len(product_list):
+                        if product_index < -1 or product_index >= len(product_list):
                             client.sendText(wa_number,"Número inválido. Por favor, escolha um produto válido.")
                         else:
                             product_list = product_menu(file_id_2, sheet_name="LCprodutos", description_mode=True, index=product_index)
@@ -794,7 +794,7 @@ def messageHandler(message):
                 else:        
                     try:
                         procedure_index = int(text.strip()) - 1
-                        if procedure_index < 0 or procedure_index >= len(procedures):
+                        if procedure_index < -1 or procedure_index >= len(procedures):
                             client.sendText(wa_number,"Número inválido. Por favor, escolha um procedimento válido.")
                         else:
 
@@ -825,7 +825,7 @@ def messageHandler(message):
                 else:                        
                     try:
                         procedure_index = int(text.strip()) - 1
-                        if procedure_index < 0 or procedure_index >= len(globals()[selected_procedure]):
+                        if procedure_index < -1 or procedure_index >= len(globals()[selected_procedure]):
                             client.sendText(wa_number,"Número inválido. Por favor, escolha um procedimento válido.")
                         else:
                             # Get the selected procedure name
@@ -912,7 +912,7 @@ def messageHandler(message):
                         time_slot_index = int(text.strip()) - 1
                         available_slots = get_available_times(user.get("selected_date"), procedure_name, main_procedure_list[procedure_name]["can_do"], main_procedure_list[procedure_name]["duration"], file_id, number)
                         
-                        if time_slot_index < 0 or time_slot_index >= len(available_slots):
+                        if time_slot_index < -1 or time_slot_index >= len(available_slots):
                             client.sendText(wa_number,"Número inválido. Por favor, escolha um horário válido.")
                         else:
                             # date_str, procedure_name, can_do, time_slot, file_id
