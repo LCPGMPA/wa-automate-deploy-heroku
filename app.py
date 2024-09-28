@@ -220,18 +220,18 @@ def get_available_times(date_str, procedure_name, can_do, duration, file_id, num
 
         # Filter the data for the specified date
         day_data = sheet[sheet['Data'] == pd.to_datetime(date_str)]
-        print(day_data)
+        # print(day_data)
         contato_count_lo_day = day_data['Contato Lo'].eq(int(stripped_number)).sum()
-        print(f"contato_count_lo_day = {contato_count_lo_day}")
+        # print(f"contato_count_lo_day = {contato_count_lo_day}")
         contato_count_lu_day = day_data['Contato Lu'].eq(int(stripped_number)).sum()
-        print(f"contato_count_lu_day = {contato_count_lu_day}")
+        # print(f"contato_count_lu_day = {contato_count_lu_day}")
 
         if (contato_count_lo_day == 1 or contato_count_lo_day == 2) and can_do == 3:
             can_do = 1
-            print("can do edited to 1")
+        #    print("can do edited to 1")
         if (contato_count_lu_day == 1 or contato_count_lu_day == 2) and can_do == 3 :
             can_do = 2
-            print("can do edited to 2")
+         #   print("can do edited to 2")
         
         if day_data.empty:
             return "No data available for this date."
@@ -255,14 +255,14 @@ def get_available_times(date_str, procedure_name, can_do, duration, file_id, num
 
         # Get the list of times available in day_data
         day_times = day_data['Horário'].tolist()
-        print(f"Times available in day_data: {day_times}")
+        # print(f"Times available in day_data: {day_times}")
 
 
 
         # Iterate over the defined time slots to check availability
         for i in range(len(time_slots) - duration + 1):
             slot_is_available = True
-            print(f"\nChecking slot starting at {time_slots[i]}:")
+            # print(f"\nChecking slot starting at {time_slots[i]}:")
 
             Lorena_Counter = 0
             Luana_Counter = 0
@@ -272,7 +272,7 @@ def get_available_times(date_str, procedure_name, can_do, duration, file_id, num
 
                 # Only consider slots that exist in the day_data
                 if current_time not in day_times:
-                    print(f"  {current_time} not found in day_times.")
+                   # print(f"  {current_time} not found in day_times.")
                     slot_is_available = False
                     break
 
@@ -281,32 +281,32 @@ def get_available_times(date_str, procedure_name, can_do, duration, file_id, num
                 slot_is_available = True
                 # Check if the slot is taken by Lorena
                 lorena_taken = can_do in [1, 3] and len(str(time_data['Lorena'].values[0]).strip()) > 0
-                print(f"Lorena taken: {lorena_taken}")
+               # print(f"Lorena taken: {lorena_taken}")
                 if lorena_taken == True:
                     Lorena_Counter += 1
                     
 
                 # Check if the slot is taken by Luana
                 luana_taken = can_do in [2, 3] and len(str(time_data['Luana'].values[0]).strip()) > 0
-                print(f"Luana taken: {luana_taken}")
+              #  print(f"Luana taken: {luana_taken}")
                 if luana_taken == True:
                     Luana_Counter += 1
 
                 # Determine if the slot is available based on 'can_do'
                 if (can_do == 1 and lorena_taken) or (can_do == 2 and luana_taken) or (can_do == 3 and (lorena_taken and luana_taken)):
                     slot_is_available = False
-                    print(f"  Slot taken at {current_time}.")
+                #    print(f"  Slot taken at {current_time}.")
                     break
 
             if (can_do == 3 and (Lorena_Counter > 0 and Luana_Counter > 0)):
                 slot_is_available = False
-                print(f' both counters bigger than 0: Lo: {Lorena_Counter} Lu: {Luana_Counter}')
+            #    print(f' both counters bigger than 0: Lo: {Lorena_Counter} Lu: {Luana_Counter}')
 
             if slot_is_available:
                 available_slots.append(time_slots[i].strftime("%H:%M"))
-                print(f"  Slot {time_slots[i].strftime('%H:%M')} added as available.")
+             #   print(f"  Slot {time_slots[i].strftime('%H:%M')} added as available.")
 
-        print(f"Available time slots: {available_slots}")
+     #   print(f"Available time slots: {available_slots}")
 
         if not available_slots:
             return "Opa, desculpe😔 Não há horário disponível para este dia!"
@@ -341,8 +341,8 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
     sheet['Horário'] = pd.to_datetime(sheet['Horário'], format="%H:%M").dt.time
 
     # Debugging: Print the columns to see what data is present
-    print(f"Contato Lo Column Data:\n{sheet['Contato Lo']}")
-    print(f"Contato Lu Column Data:\n{sheet['Contato Lu']}")
+#    print(f"Contato Lo Column Data:\n{sheet['Contato Lo']}")
+#    print(f"Contato Lu Column Data:\n{sheet['Contato Lu']}")
 
     # Clean data: Remove whitespace, non-numeric characters, and ensure string type
     sheet['Contato Lo'] = (
@@ -363,9 +363,9 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
     number_2 = str(number_1).replace("@c.us", "")
 
     # Debugging: Check after cleaning
-    print(f"Cleaned Contato Lo Column Data:\n{sheet['Contato Lo']}")
-    print(f"Cleaned Contato Lu Column Data:\n{sheet['Contato Lu']}")
-    print(f"Checking for number: {number_2}")
+#    print(f"Cleaned Contato Lo Column Data:\n{sheet['Contato Lo']}")
+#    print(f"Cleaned Contato Lu Column Data:\n{sheet['Contato Lu']}")
+#    print(f"Checking for number: {number_2}")
 
     # Count the occurrences of the contact number in both columns
     contato_count_lo = sheet['Contato Lo'].eq(number_2).sum()
@@ -373,7 +373,7 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
     total_contato_count = contato_count_lo + contato_count_lu
 
     # Debugging prints
-    print(f"Contato Lo counts: {contato_count_lo}, Contato Lu counts: {contato_count_lu}, Total: {total_contato_count}")
+#    print(f"Contato Lo counts: {contato_count_lo}, Contato Lu counts: {contato_count_lu}, Total: {total_contato_count}")
 
     # Check if the contact number has more than 3 appointments in the sheet
     if total_contato_count >= 3:
@@ -383,12 +383,12 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
 
     # Filter the data for the specified date
     day_data = sheet[sheet['Data'] == pd.to_datetime(date_str)]
-    print(f'DAY DATA:\n{day_data}')
+#    print(f'DAY DATA:\n{day_data}')
 
     contato_count_lo_day = day_data['Contato Lo'].eq(number_2).sum()
-    print(f"contato_count_lo_day = {contato_count_lo_day}")
+ #   print(f"contato_count_lo_day = {contato_count_lo_day}")
     contato_count_lu_day = day_data['Contato Lu'].eq(number_2).sum()
-    print(f"contato_count_lu_day = {contato_count_lu_day}")
+ #   print(f"contato_count_lu_day = {contato_count_lu_day}")
     
     # Locate the row that matches the specific time slot
     time_row = day_data[day_data['Horário'] == time_slot]
@@ -400,10 +400,10 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
 
             if contato_count_lo_day > 0 and can_do == 3 :
                 can_do = 1
-                print("can do edited to 1")
+            #    print("can do edited to 1")
             if contato_count_lu_day > 0 and can_do == 3 :
                 can_do = 2
-                print("can do edited to 2")
+            #    print("can do edited to 2")
 
 
             # Open the Google Sheet using gspread
