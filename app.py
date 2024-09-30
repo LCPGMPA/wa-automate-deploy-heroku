@@ -4,7 +4,7 @@ import logging
 import time as ti
 from pymongo import MongoClient
 from datetime import datetime, timedelta, time
-import re  # Import the regular expression module
+import re
 import pandas as pd
 import os
 import sys
@@ -12,6 +12,7 @@ import gspread
 from gspread.exceptions import WorksheetNotFound
 from oauth2client.service_account import ServiceAccountCredentials
 from apscheduler.schedulers.background import BackgroundScheduler
+import gc
 
 # MONGODB
 # MongoDB connection
@@ -954,6 +955,7 @@ async def main():
     # Listening for incoming messages
     client.onMessage(messageHandler)
 
+    # Function to reset inactive users
     def reset_inactive_users():
         six_hours_ago = datetime.now() - timedelta(hours=6)
         users.update_many(
@@ -962,31 +964,44 @@ async def main():
         )
         print(f"Inactive users reset to main status. @ {datetime.now()}")
 
+    # Function to reset bot status
+    def reset_bot_status():
+        print("Bot status reset triggered.")
+
+    # Periodic cleanup of old jobs (this clears old jobs that might build up)
+    def clear_old_jobs():
+        print(f"Clearing old jobs. @ {datetime.now()}")
+        scheduler.remove_all_jobs()
+
+    # Function to trigger garbage collection
+    def collect_garbage():
+        print(f"Running garbage collection. @ {datetime.now()}")
+        gc.collect()  # Manually trigger the garbage collector
+        print(f"Garbage collection completed. @ {datetime.now()}")
+    
     # Set up the scheduler
     scheduler = BackgroundScheduler()
-    scheduler.add_job(reset_inactive_users, 'interval', minutes=15)  # Check every 15 minutes
-    scheduler.add_job(reset_bot_status, 'interval', minutes=15)  # Check every 15 minutes
-    scheduler.start()
 
+    # Add jobs to the scheduler
+    scheduler.add_job(reset_inactive_users, 'interval', minutes=15)  # Reset users every 15 minutes
+    scheduler.add_job(reset_bot_status, 'interval', minutes=15)  # Reset bot status every 15 minutes
+    scheduler.add_job(clear_old_jobs, 'interval', hours=6)  # Clear old jobs every 6 hours
+    scheduler.add_job(collect_garbage, 'interval', hours=1)  # Run garbage collection every hour
 
+    scheduler.start()  # Start the scheduler
 
-    initialize_bot_status()    
-
+    initialize_bot_status()  # Initialize the bot status
 
     # Sync request to get the host number
     print(client.getHostNumber())
 
-    # Send an audio message asynchronously (without await, since it's not an async function)
-    
     print("Waiting for messages...")
 
     # Keep the script running indefinitely
     while True:
         await asyncio.sleep(2)  # Non-blocking sleep to keep the loop alive
 
-
 if __name__ == "__main__":
-
     try:
         # Run the async main loop
         asyncio.run(main())
