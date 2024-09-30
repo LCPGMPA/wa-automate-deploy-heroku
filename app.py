@@ -950,8 +950,10 @@ def messageHandler(message):
 
 
 
-
 async def main():
+    # Sync request to get the host number
+    print(client.getHostNumber())
+    
     # Listening for incoming messages
     client.onMessage(messageHandler)
 
@@ -991,9 +993,6 @@ async def main():
     scheduler.start()  # Start the scheduler
 
     initialize_bot_status()  # Initialize the bot status
-
-    # Sync request to get the host number
-    print(client.getHostNumber())
 
     print("Waiting for messages...")
 
