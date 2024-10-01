@@ -707,7 +707,7 @@ def messageHandler(message):
                     # Process the order
                     client.sendText(wa_number,"Como podemos ajudá-lo? 🤗\n\nPara marcar um agendamento para um procedimento,\ndigite 1️⃣\n\nPara acessar nossos produtos,\ndigite 2️⃣\n\nPara outras perguntas ou comentários,\ndigite 3️⃣.")
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})
-                if text.lower() == "#":
+                elif text.lower() == "#":
                     # Process the order
                     client.sendText(wa_number,f"Ótimo! Por favor {name}, aguarde até que nossa recepcionista possa entrar em contato com você!\n\nInformamos que nosso horário de funcionamento é o seguinte:\n\nSegunda-feira: *Fechado*\nTerça-feira: *12:30-18:00*\nQuarta-feira: *12:30-18:00*\nQuinta-feira: *12:30-18:00*\nSexta-feira: *12:30-18:00*\nSábado: *8:00-18:00*\nDomingo: *Fechado*")
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})  # Set status        
