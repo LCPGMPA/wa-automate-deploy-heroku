@@ -427,7 +427,7 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
                         gsheet.update_cell(time_row.index[0] + 2, 7, name)
                         gsheet.update_cell(time_row.index[0] + 2, 9, number_2)
                         gsheet.update_cell(time_row.index[0] + 2, 11, 'PREC. CONFIRM!')                            
-                        return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂"
+                        return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂\n\n_Observe que a política da nossa empresa exige um pagamento adiantado de 15% do valor total antes da confirmação definitiva._"
                     
                     elif len(str(time_row['Lorena'].values[0])) == 0:
                         gsheet.update_cell(time_row.index[0] + 2, 4, procedure_name)
@@ -436,7 +436,7 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
                         gsheet.update_cell(time_row.index[0] + 2, 6, name)
                         gsheet.update_cell(time_row.index[0] + 2, 8, number_2)
                         gsheet.update_cell(time_row.index[0] + 2, 10, 'PREC. CONFIRM!')                       
-                        return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂"
+                        return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂\n\n_Observe que a política da nossa empresa exige um pagamento adiantado de 15% do valor total antes da confirmação definitiva._"
                     else:
                         return "opa, deu bug🤯.\nPor favor, tente novamente."
                         
@@ -447,7 +447,7 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
                     gsheet.update_cell(time_row.index[0] + 2, 6, name)
                     gsheet.update_cell(time_row.index[0] + 2, 8, number_2) 
                     gsheet.update_cell(time_row.index[0] + 2, 10, 'PREC. CONFIRM!')                    
-                    return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂"
+                    return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂\n\n_Observe que a política da nossa empresa exige um pagamento adiantado de 15% do valor total antes da confirmação definitiva._"
                 else:
                     return "opa, deu bug🤯.\nPor favor, tente novamente."
 
@@ -459,7 +459,7 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
                     gsheet.update_cell(time_row.index[0] + 2, 6, name)
                     gsheet.update_cell(time_row.index[0] + 2, 8, number_2)
                     gsheet.update_cell(time_row.index[0] + 2, 10, 'PREC. CONFIRM!')                        
-                    return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂"
+                    return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂\n\n_Observe que a política da nossa empresa exige um pagamento adiantado de 15% do valor total antes da confirmação definitiva._"
                 else:
                     return "opa, deu bug🤯.\nPor favor, tente novamente."
 
@@ -471,7 +471,7 @@ def book_appointment(date_str, time_slot, procedure_name, name, wa_number):
                     gsheet.update_cell(time_row.index[0] + 2, 7, name)
                     gsheet.update_cell(time_row.index[0] + 2, 9, number_2)
                     gsheet.update_cell(time_row.index[0] + 2, 11, 'PREC. CONFIRM!')                      
-                    return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂"
+                    return f"*{procedure_name}* agendada com sucesso! 😍\n\nEm: {formatted_date_portuguese} às {time_slot}\n\n\n{name}, sua vaga está reservada. A recepcionista entrará em contato com você para confirmar isso! 🙂\n\n_Observe que a política da nossa empresa exige um pagamento adiantado de 15% do valor total antes da confirmação definitiva._"
                 else:
                     return "opa, deu bug🤯.\nPor favor, tente novamente."
         else:
@@ -510,15 +510,15 @@ def order_notification(order_id):
         order = orders.find_one( {"_id": order_id})
     # Replace with your MongoDB connection string
         orders_list = []
- 
-      
+         
+        number = (str(order.get("number", ""))).replace("@c.us", "")  
         order_details = [
-            (f'**************\nID: {str(order["_id"])}\n'),
-            (f'NUMERO: {order.get("number", "")}\n'),
+            (f'**************\n'),
+            (f'NUMERO: {number}\n'),
             (f'DATA: {str(order.get("data", ""))}\n'),
-            (f'NOME: {order.get("name", "")}\n\n'),
+            (f'NOME: {order.get("name", "")}\n'),
             (f'*PRODUTO*: {order.get("produto", "")}\n\n'),
-            (f'*Info*:\n{order.get("info", "")}\n**************\n\n\n'),
+            (f'*Info*:\n{order.get("info", "")}\n**************'),
                     
         ]
         orders_list.append(order_details)
@@ -671,7 +671,7 @@ def messageHandler(message):
                 elif text.lower() == "1":
                     # Process the order
                     date = datetime.now()
-                    client.sendText(wa_number,f"\n\nÓtima escolha {name}! 😃\n\nEntraremos em contato com você o mais breve possível para continuar com seu pedido.🏃🏽‍♀️‍➡️ \n\nPara facilitar o pedido, especifique já a forma de pagamento e forma de entrega (retirada ou entrega)!😊")
+                    client.sendText(wa_number,f"\n\nÓtima escolha {name}! 😃\n\nEntraremos em contato com você o mais breve possível para continuar com seu pedido.🏃🏽‍♀️‍➡️\n\nPara facilitar o pedido, especifique já a forma de pagamento e forma de entrega (retirada ou entrega)!😊")
                     orders.insert_one({"number": wa_number, "data": date, "status": "não confirmado", "informações": text, "name": name, "produto": user.get("selected_product")})
                     users.update_one({"number": wa_number}, {"$set": {"status": "product phase 3"}})                
                 else:    
@@ -695,7 +695,7 @@ def messageHandler(message):
                             {"_id": latest_order["_id"]}, 
                             {"$set": {"status": "CONFIRMADO", "info": text}} )
 
-                        client.sendText(wa_number,f"\n\nParabéns pela sua pedida {name}! 😍\n\nNossa recepcionista entrará em contato com você o mais rápido possível para confirmar!\n\n")
+                        client.sendText(wa_number,f"\n\n*Parabéns pelo seu pedido {name}!* 😍\n\nNossa recepcionista entrará em contato com você o mais rápido possível para confirmar!\n\n")
                         
                         order_id = latest_order.get("_id")
                         client.sendText(os.getenv("NUMBER_1"), f"NOVO PEDIDO FEITO NO NÚMERO DO LC!\n\n\n{order_notification(order_id)}")
