@@ -528,6 +528,35 @@ def order_notification(order_id):
 
 
         return combined_string
+
+    # Function to reset inactive users
+def reset_inactive_users():
+        users.update_many(
+            {"status": {"$ne": "main"}},  # Assuming you want to reset users who aren't already 'main'
+            {"$set": {"status": "main"}}
+        )
+        print(f"Inactive users reset to main status. @ {datetime.now()}")
+
+    # Function to reset bot status
+def reset_bot_status():
+        print("Bot status reset triggered.")
+
+    # Periodic cleanup of old jobs (this clears old jobs that might build up)
+def clear_old_jobs():
+        print(f"Clearing old jobs. @ {datetime.now()}")
+        scheduler.remove_all_jobs()
+
+    # Function to trigger garbage collection
+def collect_garbage():
+        print(f"Running garbage collection. @ {datetime.now()}")
+        gc.collect()  # Manually trigger the garbage collector
+        try:
+            loaded_messages = int(client.getAmountOfLoadedMessages())
+            if loaded_messages > 50:
+                client.cutMsgCache()
+        except:
+            print(f"msg cache not cleared")
+        print(f"Garbage collection completed. @ {datetime.now()}")
                 
 
 
@@ -878,36 +907,6 @@ def messageHandler(message):
 async def main():
     # Sync request to get the host number
     print(client.getHostNumber())
-    
-
-    # Function to reset inactive users
-    def reset_inactive_users():
-        users.update_many(
-            {"status": {"$ne": "main"}},  # Assuming you want to reset users who aren't already 'main'
-            {"$set": {"status": "main"}}
-        )
-        print(f"Inactive users reset to main status. @ {datetime.now()}")
-
-    # Function to reset bot status
-    def reset_bot_status():
-        print("Bot status reset triggered.")
-
-    # Periodic cleanup of old jobs (this clears old jobs that might build up)
-    def clear_old_jobs():
-        print(f"Clearing old jobs. @ {datetime.now()}")
-        scheduler.remove_all_jobs()
-
-    # Function to trigger garbage collection
-    def collect_garbage():
-        print(f"Running garbage collection. @ {datetime.now()}")
-        gc.collect()  # Manually trigger the garbage collector
-        try:
-            loaded_messages = int(client.getAmountOfLoadedMessages())
-            if loaded_messages > 50:
-                client.cutMsgCache()
-        except:
-            print(f"msg cache not cleared")
-        print(f"Garbage collection completed. @ {datetime.now()}")
     
     # Set up the scheduler
     scheduler = BackgroundScheduler()
