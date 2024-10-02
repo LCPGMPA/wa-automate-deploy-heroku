@@ -623,7 +623,7 @@ def messageHandler(message):
                     users.update_one({"number": wa_number}, {"$set": {"status": "product phase"}})
                 elif text.lower() == "3":
                     # Handle ordering process
-                    client.sendText(wa_number,"Ótimo! Por favor, aguarde até que nossa recepcionista possa entrar em contato com você!\n\nInformamos que nosso horário de funcionamento é o seguinte:\n\nSegunda-feira: *Fechado*\nTerça-feira: *12:30-18:00*\nQuarta-feira: *12:30-18:00*\nQuinta-feira: *12:30-18:00*\nSexta-feira: *12:30-18:00*\nSábado: *8:00-18:00*\nDomingo: *Fechado*")
+                    client.sendText(wa_number,"Ótimo! Por favor, aguarde até que nossa recepcionista possa entrar em contato com você!\n\nInformamos que nosso horário de funcionamento é o seguinte:\n\nSegunda-feira: *Fechado*\nTerça-feira: *12:30-18:00*\nQuarta-feira: *12:30-18:00*\nQuinta-feira: *12:30-18:00*\nSexta-feira: *12:30-18:00*\nSábado: *8:00-18:00*\nDomingo: *Fechado*\n\n\n_Os horários de funcionamento podem ser diferentes durante os feriados!_")
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})  # Set status 
                 else:
                     client.sendText(wa_number,"")
@@ -715,7 +715,7 @@ def messageHandler(message):
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})
                 elif text.lower() == "#":
                     # Process the order
-                    client.sendText(wa_number,f"Ótimo! Por favor {name}, aguarde até que nossa recepcionista possa entrar em contato com você!\n\nInformamos que nosso horário de funcionamento é o seguinte:\n\nSegunda-feira: *Fechado*\nTerça-feira: *12:30-18:00*\nQuarta-feira: *12:30-18:00*\nQuinta-feira: *12:30-18:00*\nSexta-feira: *12:30-18:00*\nSábado: *8:00-18:00*\nDomingo: *Fechado*")
+                    client.sendText(wa_number,f"Ótimo! Por favor {name}, aguarde até que nossa recepcionista possa entrar em contato com você!\n\nInformamos que nosso horário de funcionamento é o seguinte:\n\nSegunda-feira: *Fechado*\nTerça-feira: *12:30-18:00*\nQuarta-feira: *12:30-18:00*\nQuinta-feira: *12:30-18:00*\nSexta-feira: *12:30-18:00*\nSábado: *8:00-18:00*\nDomingo: *Fechado*\n\n\n_Os horários de funcionamento podem ser diferentes durante os feriados!_")
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})  # Set status        
                 else:        
                     try:
@@ -882,9 +882,8 @@ async def main():
 
     # Function to reset inactive users
     def reset_inactive_users():
-        six_hours_ago = datetime.now() - timedelta(hours=6)
         users.update_many(
-            {"last_active": {"$lt": six_hours_ago}},
+            {"status": {"$ne": "main"}},  # Assuming you want to reset users who aren't already 'main'
             {"$set": {"status": "main"}}
         )
         print(f"Inactive users reset to main status. @ {datetime.now()}")
@@ -914,7 +913,7 @@ async def main():
     scheduler = BackgroundScheduler()
 
     # Add jobs to the scheduler
-    scheduler.add_job(reset_inactive_users, 'interval', minutes=15)  # Reset users every 15 minutes
+    scheduler.add_job(reset_inactive_users, 'cron', hour=5, minute=0)
     scheduler.add_job(reset_bot_status, 'interval', minutes=15)  # Reset bot status every 15 minutes
     scheduler.add_job(clear_old_jobs, 'interval', hours=3)  # Clear old jobs every 3 hours
     scheduler.add_job(collect_garbage, 'interval', hours=1)  # Run garbage collection every hour
