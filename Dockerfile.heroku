@@ -14,7 +14,7 @@ RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
 COPY app.py /usr/src/app/
 COPY session.data.json /usr/src/app/
-COPY /sessions/_IGNORE_session /sessions
+COPY /sessions/_IGNORE_session /sessions/
 
 # Switch back to the default user
 USER node
