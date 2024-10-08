@@ -16,8 +16,9 @@ COPY app.py /usr/src/app/
 COPY session.data.json /usr/src/app/
 
 
-RUN mkdir -p /sessions && chmod -R 777 /sessions
+RUN mkdir -p /sessions/_IGNORE_session && chmod -R 777 /sessions/_IGNORE_session
 COPY sessions/_IGNORE_session /sessions/_IGNORE_session/
+COPY sessions/_IGNORE_session /usr/src/app/sessions/_IGNORE_session/
 
 # Switch back to the default user
 USER node
