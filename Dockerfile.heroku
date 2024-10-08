@@ -16,7 +16,7 @@ COPY app.py /usr/src/app/
 COPY session.data.json /usr/src/app/
 
 
-RUN mkdir -p /sessions/_IGNORE_session
+RUN mkdir -p /sessions && chmod -R 777 /sessions
 COPY sessions/_IGNORE_session /sessions/_IGNORE_session/
 
 # Switch back to the default user
