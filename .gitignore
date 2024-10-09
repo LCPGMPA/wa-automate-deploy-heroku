@@ -30,6 +30,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+sessions/_IGNORE_session/
+
 # TypeScript v1 declaration files
 typings/
 # TypeScript cache
