@@ -86,22 +86,22 @@ Sobrancelhas = {
         "Micropigmentação: SOFT POWDER BROWS": {"duration": 8, "can_do": 1, "description": "Técnica Europea de micropigmentação que tem com objetivo dar volume com pixels, encorpando a sobrancelha, diminuindo falhas, deixando um ton muito natural e simétrico.\n*Retoque após 30 dias incluso*\n\n*Com durabilidade de 1 ano e meio a 2 anos.* (Não é tatuagem!)\n\n Valor do investimento: R$ 900,00"},
         "BROW BEAUTY": {"duration": 4, "can_do": 1, "description": "Técnica de laminagem das sobrancelhas, criando um efeito de preenchimento e volume natural das sobrancelhas em efeito fio a fio com hidratação e nutrição dos fios.\n*Design personalizado mais pigmento temporário incluso*\n\n*Com durabilidade de 4 a 6 semanas.*\n\n Valor do investimento: R$ 180,00"},
         "BROWS REPAIR": {"duration": 3, "can_do": 1, "description": "Técnica de microagulhamento das sobrancelhas com blend de vitaminas e fatores de crescimento natural dos fios, para recuperar e reconstruir as suas sobrancelhas de forma natural e saudável.\n\n Valor do investimento: R$ 100,00 \n\n Pacote de 3 sessões: R$ 240,00"},
-        "BROWS TOTAL COLOR (ruivas e loiras)": {"duration": 3, "can_do": 1, "description": "escreve-aqui"},
+        "BROWS TOTAL COLOR (ruivas e loiras)": {"duration": 3, "can_do": 1, "description": "Procedimento para tonalizar o tom dos fios exatamente proporcional ao tom capilar. Por exemplo: Ruivos, loiros, castanhos. Design incluso.\n\n Valor do investimento: R$ 100,00."},
         }
 
 Procedimentos_Labial = {
-        "Micropigmentação: NEUTRA LIPS": {"duration": 7, "can_do": 1, "description": '*Limpeza de Pele PREMIUM* tem como objetivo remover cravos fazendo um detox da pele.\nCom alta concenração de etivos e equipamentos de última geração e tecnologia para nutrir e cuidar da sua pele.\n\n Valor do investimento: R$ 220,00'},
-        "Micropigmentação: LCOLOR LIPS": {"duration": 7, "can_do": 1, "description": "escreve-aqui"},
-        "Micropigmentação: ANGEL LIPS": {"duration": 7, "can_do": 1, "description": "escreve-aqui"},
-        "Micropigmentação: REVITA LIPS": {"duration": 7, "can_do": 1, "description": "escreve-aqui"},
-        "HYDRABEAUTY": {"duration": 3, "can_do": 3, "description": "escreve-aqui"},
+        "Micropigmentação: NEUTRA LIPS": {"duration": 7, "can_do": 1, "description": "Técnica incrível para os lábios que desejam apresentar uma coloração mais uniforme e natural. Manchas escuras, descolorações e outros problemas de pigmentação são minimizados ou completamente eliminados.\n\n Valor do investimento: R$ 900,00 (já com retoque incluso após 30 dias!)"},
+        "Micropigmentação: LCOLOR LIPS": {"duration": 7, "can_do": 1, "description": "Técnica que pode melhorar a assimetria dos lábios, corrigir imperfeições, como cicatrizes ou falta de pigmentação, e criar a ilusão de lábios mais cheios e volumosos. Além disso, a técnica proporciona um visual duradouro, economizando tempo no dia a dia, pois dispensa a aplicação constante de batom. \n\n Valor do investimento: R$ 800,00 (já com retoque incluso!)"},
+        "Micropigmentação: ANGEL LIPS": {"duration": 7, "can_do": 1, "description": "Técnica de micropigmentação com volume e naturalidade para lábios sem marcação, com cor suave e natural quem deseja manter lábios com cor em tons suaves e elegantes.\n\n Valor do investimento: R$ 990,00"},
+        "Micropigmentação: REVITA LIPS": {"duration": 7, "can_do": 1, "description": "Sabe aquela cor de lábios pálidos ? Apenas querendo um tom de saúde ? Essa técnica é para você em apenas 1 sessão você alcança esse resultado.\n\n Valor do investimento: R$ 480,00"},
+        "HYDRABEAUTY": {"duration": 3, "can_do": 3, "description": "Efeito glow deixando seus lábios com aspecto saudável, remove células da pele morta, estímulo do colágeno e da elasticidade da pele. Lábios macios e hidratados. 0 dor e desconforto.\n\n Valor do investimento: R$ 180,00"},
         }
 
 Peeling = {
-        "DIAMANTE": {"duration": 4, "can_do": 3, "description": '*Limpeza de Pele PREMIUM* tem como objetivo remover cravos fazendo um detox da pele.\nCom alta concenração de etivos e equipamentos de última geração e tecnologia para nutrir e cuidar da sua pele.\n\n Valor do investimento: R$ 220,00'},
-        "QUÍMICO": {"duration": 4, "can_do": 3, "description": "escreve-aqui"},
-        "FÍSICO": {"duration": 4, "can_do": 3, "description": "escreve-aqui"},
-        "PEELING DE HOLLYWOOD": {"duration": 4, "can_do": 3, "description": "escreve-aqui"}, 
+        "DIAMANTE": {"duration": 4, "can_do": 3, "description": "Procedimento para quem busca uma pele rejuvenescida pois proporciona uma renovação celular, removendo as células mortas da superfície da pele e estimulando novas células. O resultado é uma pele mais fresca e jovem. Além disso, o peeling de diamante pode melhorar significativamente a textura da pele, tornando-a mais lisa e uniforme.\n\n Valor do investimento: R$ 390,00\n\n_(consulte se sua pele realmente está habilitada para realizar o procedimento) Solicite consulta avaliativa!._"},
+        "QUÍMICO": {"duration": 4, "can_do": 3, "description": "Tratamento utilizando aplicação de ácidos sobre a pele para retirar as camadas danificadas e promover o crescimento de uma camada lisa, podendo ser feito para eliminar manchas e linhas de expressão, por exemplo de acne.\n\n Valor do investimento: R$ 390,00\n\n_(consulte se sua pele realmente está habilitada para realizar o procedimento) Solicite consulta avaliativa!._"},
+        "FÍSICO": {"duration": 4, "can_do": 3, "description": "Sem ácidos, para procedimento totalmente natural. Removendo as células epiteliais mortas e que já foram agredidas por fatores intrínsecos e, principalmente, extrínsecos, o peeling dá lugar a uma pele nova muito mais uniforme, jovem e saudável. Além disso, a reestruturação da pele estimula a produção de colágeno, deixando-a firme, viçosa e rejuvenescida.\n\n Valor do investimento: R$ 420,00\n\n_(consulte se sua pele realmente está habilitada para realizar o procedimento) Solicite consulta avaliativa!._"},
+        "PEELING DE HOLLYWOOD": {"duration": 4, "can_do": 3, "description": "O procedimento reduz a aparência de poros dilatados, diminui as linhas de expressão, harmoniza a tonalidade da cor da pele, aumenta a produção de colágeno e elastina e proporciona um efeito de profunda regeneração, deixando a pele mais homogênea e iluminada. Sem dor e desconforto.\n\n Valor do investimento: R$ 580,00\n\n_(consulte se sua pele realmente está habilitada para realizar o procedimento) Solicite consulta avaliativa!._"}, 
         }
 
 # logging.basicConfig(level=logging.DEBUG)
@@ -659,7 +659,7 @@ def messageHandler(message):
                             # Store the selected procedure in the user's record
                             users.update_one({"number": wa_number}, {"$set": {"selected_product": product_list[0]}})
                             # Prompt the user for a date
-                            client.sendText(wa_number,f"{name} 🙂,\nvocê selecionou o seguinte produto:\n\n{product_list_visual}\n\nPara *fazer esse pedido*, digite 1️⃣\n\n Para *cancelar e voltar*, digite 0️⃣")      
+                            client.sendText(wa_number,f"{name} 🙂,\nvocê selecionou o seguinte produto:\n\n{product_list_visual}\n\nA vista sempre tem um desconto!\n\nPara *fazer esse pedido*, digite 1️⃣\n\n Para *cancelar e voltar*, digite 0️⃣")      
                             # Update status to 'date phase'
                             users.update_one({"number": wa_number}, {"$set": {"status": "product phase 2"}})
                     except ValueError:
