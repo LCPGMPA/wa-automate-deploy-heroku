@@ -625,7 +625,7 @@ def messageHandler(message):
                     users.update_one({"number": wa_number}, {"$set": {"status": "product phase"}})
                 elif text.lower() == "3":
                     # Handle ordering process
-                    client.sendText(wa_number,"Ótimo! Por favor, aguarde até que nossa recepcionista possa entrar em contato com você!\n\nInformamos que nosso horário de funcionamento é o seguinte:\n\nSegunda-feira: *Fechado*\nTerça-feira: *12:30-18:00*\nQuarta-feira: *12:30-18:00*\nQuinta-feira: *12:30-18:00*\nSexta-feira: *12:30-18:00*\nSábado: *8:00-18:00*\nDomingo: *Fechado*\n\n\n_Os horários de funcionamento podem ser diferentes durante os feriados!_")
+                    client.sendText(wa_number,"Ótimo! Por favor, aguarde até que nossa recepcionista possa entrar em contato com você!\n\nInformamos que nosso horário de funcionamento é o seguinte:\n\nSegunda-feira: *Fechado*\nTerça-feira: *12:30-18:00*\nQuarta-feira: *12:30-18:00*\nQuinta-feira: *12:30-18:00*\nSexta-feira: *12:30-18:00*\nSábado: *8:00-18:00*\nDomingo: *Fechado*\n\n\n_Os horários de funcionamento podem ser diferentes durante os feriados!_\n\n*Você já pode deixar sua mensagem!*👇🏽😊")
                     users.update_one({"number": wa_number}, {"$set": {"status": "phase initial"}})  # Set status 
                 else:
                     client.sendText(wa_number,"")
