@@ -1,10 +1,18 @@
 build: 
   docker:
     web: Dockerfile.heroku
+
 run:
-  web: PORT=$PORT WA_PORT=$PORT node ./node_modules/@open-wa/wa-automate/bin/server.js --use-chrome --force-port=$PORT --in-docker --qr-timeout 0 --popup --multi-device --debug --verbose --disable-spins --ezqr
+  web: 
+    command: PORT=$PORT WA_PORT=$PORT node ./node_modules/@open-wa/wa-automate/bin/server.js --use-chrome --force-port=$PORT --in-docker --qr-timeout 0 --popup --multi-device --debug --verbose --disable-spins --ezqr
+    resources:
+      limits:
+        memory: "512M" 
+
   worker:
     command:
       - python3 app.py
+    resources:
+      limits:
+        memory: "512M" 
     image: web
-
