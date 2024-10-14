@@ -19,4 +19,4 @@ COPY app.py /usr/src/app/
 USER node
 
 
-
+ENTRYPOINT []
