@@ -1,23 +1,35 @@
+# Use the openwa/wa-automate base image
 FROM openwa/wa-automate
 
-# Switch to root user to install Python and pip
+# Switch to root user to install Python, pip, and setup swap memory
 USER root
 
-# Install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-pip
+# Install Python, pip, and other tools
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    apt-get install -y --no-install-recommends \
+        fallocate util-linux && \  # Required for swap setup
+    fallocate -l 1G /swapfile && \
+    chmod 600 /swapfile && \
+    mkswap /swapfile && \
+    swapon /swapfile
 
 # Copy your requirements.txt into the container
 COPY requirements.txt /app/requirements.txt
 
-# Install the Python dependencies
+# Install Python dependencies
 RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
+# Copy your app.py into the container
 COPY app.py /usr/src/app/
 
+# Ensure swap is active on container start
+CMD swapon /swapfile && node /usr/src/app/app.js
 
-# Switch back to the default user
+# Switch back to the default node user
 USER node
 
+# Optional: Override entrypoint if necessary
 ENTRYPOINT []
 
 
