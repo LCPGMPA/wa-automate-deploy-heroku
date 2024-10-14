@@ -880,6 +880,10 @@ def messageHandler(message):
 async def main():
     # Sync request to get the host number
     print(client.getHostNumber())
+    loaded_messages = int(client.getAmountOfLoadedMessages())
+    if loaded_messages > 100:
+        client.cutMsgCache()
+        client.cutChatCache()
     
     # Set up the scheduler
     scheduler = BackgroundScheduler()
@@ -896,6 +900,7 @@ async def main():
             loaded_messages = int(client.getAmountOfLoadedMessages())
             if loaded_messages > 50:
                 client.cutMsgCache()
+                client.cutChatCache()
         except:
             print(f"msg cache not cleared")
         print(f"Garbage collection completed. @ {datetime.now()}")
