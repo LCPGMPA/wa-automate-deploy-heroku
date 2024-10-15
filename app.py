@@ -881,9 +881,11 @@ async def main():
     # Sync request to get the host number
     print(client.getHostNumber())
     loaded_messages = int(client.getAmountOfLoadedMessages())
-    if loaded_messages > 100:
+    counter = 0
+    while loaded_messages > 100 and counter < 50:
         client.cutMsgCache()
         client.cutChatCache()
+        counter += 1
     
     # Set up the scheduler
     scheduler = BackgroundScheduler()
