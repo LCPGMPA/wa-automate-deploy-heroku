@@ -2,7 +2,7 @@ build:
   docker:
     web: Dockerfile.heroku
 run:
-  web: PORT=$PORT WA_PORT=$PORT node ./node_modules/@open-wa/wa-automate/bin/server.js --use-chrome --force-port=$PORT --in-docker --qr-timeout 0 --popup --multi-device --debug --verbose --disable-spins --ezqr --optimize_for_size --max_old_space_size=230 --no-sandbox --disable-gpu
+  web: PORT=$PORT WA_PORT=$PORT node ./node_modules/@open-wa/wa-automate/bin/server.js --use-chrome --force-port=$PORT --in-docker --qr-timeout 0 --popup --multi-device --debug --verbose --disable-spins --ezqr --optimize_for_size --max_old_space_size=230 --no-sandbox --disable-gpu --disable-cache --disable-application-cache
   worker:
     command:
       - python3 app.py
