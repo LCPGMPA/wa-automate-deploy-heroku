@@ -579,11 +579,11 @@ def messageHandler(message):
             
             # Insert user with an empty name and status to be updated later
                 users.insert_one({"number": wa_number, "status": "waiting_for_name", "messages": [], "name": ""})
-                client.sendText(wa_number, "Olá, tudo bem? 😊\nNosso novo sistema ainda não registrou você!😬\nQual é seu nome?")   
+                client.sendText(wa_number, "Olá, tudo bem? 😊\nNosso novo sistema automatizado ainda não registrou você!😬\nQual é seu nome?")   
             #WAITING FOR NAME    
             elif user['status'] == "waiting_for_name":
                 # Validate the name to ensure it contains only letters
-                if re.match("^[A-Za-z\s]+$", text):  # Check if the name contains only letters and spaces
+                if re.match("^[A-Za-z]+(?:\s[A-Za-z]+){0,2}$", text):  # Check if the name contains only letters and spaces
                     # If user provides a valid name, save the name and update status
                     users.update_one({"number": wa_number}, {"$set": {"name": text, "status": "main"}})
                     client.sendText(wa_number,f"Obrigada, {text}! Como podemos ajudá-lo hoje? 😊\n\nPara marcar um agendamento para um procedimento,\ndigite 1️⃣\n\nPara acessar nossos produtos,\ndigite 2️⃣\n\nPara outras perguntas ou comentários,\ndigite 3️⃣ \n\n\nGostaríamos de anunciar que recentemente também realizamos procedimentos de epilação a laser!🥳")
