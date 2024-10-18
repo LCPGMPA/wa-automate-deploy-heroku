@@ -579,7 +579,7 @@ def messageHandler(message):
             
             # Insert user with an empty name and status to be updated later
                 users.insert_one({"number": wa_number, "status": "waiting_for_name", "messages": [], "name": ""})
-                client.sendText(wa_number, "Olá, tudo bem? 😊\nNosso novo sistema automatizado ainda não registrou você!😬\nQual é seu nome?")   
+                client.sendText(wa_number, "Olá, tudo bem? 😊\nNosso novo sistema automatizado ainda não registrou você!😬\nDesculpe pela inconveniência!🥺\n\nQual é seu nome?")   
             #WAITING FOR NAME    
             elif user['status'] == "waiting_for_name":
                 # Validate the name to ensure it contains only letters
