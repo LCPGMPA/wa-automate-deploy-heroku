@@ -659,7 +659,7 @@ def messageHandler(message):
                             # Store the selected procedure in the user's record
                             users.update_one({"number": wa_number}, {"$set": {"selected_product": product_list[0]}})
                             # Prompt the user for a date
-                            client.sendText(wa_number,f"{name} 🙂,\nvocê selecionou o seguinte produto:\n\n{product_list_visual}\n\nPreço a vista\n\nPara *fazer esse pedido*, digite 1️⃣\n\n Para *cancelar e voltar*, digite 0️⃣")      
+                            client.sendText(wa_number,f"{name} 🙂,\nvocê selecionou o seguinte produto:\n\n{product_list_visual}\n\nComentários e dúvidas podem ser feitos após o pedido!\n\nPara *fazer esse pedido*, digite 1️⃣\n\n Para *cancelar e voltar*, digite 0️⃣")      
                             # Update status to 'date phase'
                             users.update_one({"number": wa_number}, {"$set": {"status": "product phase 2"}})
                     except ValueError:
