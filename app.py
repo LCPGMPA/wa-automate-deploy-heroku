@@ -607,11 +607,10 @@ def messageHandler(message):
             #PHASE INITIAL 
             elif user['status'] == "phase initial":
                 if text.lower() == "reset status":
-                    update_last_human_message()
                     client.sendText(wa_number,f"All chats reset to main status!")
                     users.update_many(
-                        {"status": {"$ne": "main"}},  # Assuming you want to reset users who aren't already 'main'
-                        {"$set": {"status": "main"}} )
+                        {"status": {"$not": {"$in": ["main", "waiting_for_name"]}}},  
+                        {"$set": {"status": "main"}})
                 elif text.lower() == "blacklist mode":
                     client.sendText(wa_number,f"Insira o número que deseja colocar na blacklist.\nVocê deve adicionar o código do país.\n\nExemplo: o número brasileiro 9185772657 \n(em alguns casos escrito como 91 98 5772657)\n\nprecisa ser escrito como +559185772657")
                     users.update_one({"number": wa_number}, {"$set": {"status": "blacklisting"}})  # Set status             
@@ -914,9 +913,8 @@ async def main():
     # Function to reset inactive users
     def reset_inactive_users():
         users.update_many(
-            {"status": {"$ne": "main"}},  # Assuming you want to reset users who aren't already 'main'
-            {"$set": {"status": "main"}}
-        )
+            {"status": {"$not": {"$in": ["main", "waiting_for_name"]}}},  
+            {"$set": {"status": "main"}})
         print(f"Inactive users reset to main status. @ {datetime.now()}")
     
 
