@@ -621,7 +621,7 @@ def messageHandler(message):
                     # Process the order
                     product_list = product_menu(file_id_2, sheet_name="LCprodutos", description_mode=False, index=None)
                     product_list_display = "\n".join([f"{i}. {item}" for i, item in enumerate(product_list, start=1)])
-                    client.sendText(wa_number,f"Ótimo! Aqui está o menu:\n\n{product_list_display}\n\nPor favor, *digite o número do produto que você deseja pedir*.\n\n\n_O produto que você quer não está nesta lista?_\nEle possivelmente está fora de estoque.\nEm breve, repomos nosso estoque.")
+                    client.sendText(wa_number,f"Ótimo! Aqui está o menu:\n\n{product_list_display}\n\nPor favor, *digite o número do produto que você deseja pedir*.\n\n\n_O produto que você quer não está nesta lista?_\nEle possivelmente está fora de estoque.\nEm breve, repomos nosso estoque.\n\n*Para voltar, digite* 0️⃣")
                     users.update_one({"number": wa_number}, {"$set": {"status": "product phase"}})
                 elif text.lower() == "3":
                     # Handle ordering process
@@ -906,6 +906,7 @@ async def main():
         except:
             print(f"msg cache not cleared")
         print(f"Garbage collection completed. @ {datetime.now()}")
+    
 
     # Add jobs to the scheduler
     scheduler.add_job(reset_inactive_users, 'cron', hour=5, minute=0)
